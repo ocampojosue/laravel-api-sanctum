@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActualizarPacienteRequest;
 use App\Models\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -54,7 +55,7 @@ class PatientController extends Controller
         return response()->json([
             'res' => true,
             'msg' => 'Paciente guardado correcamente'
-        ]);
+        ], 200);
     }
 
     /**
@@ -68,7 +69,7 @@ class PatientController extends Controller
         return response()->json([
             'res' => true,
             'paciente' => $paciente
-        ]);
+        ], 200);
     }
 
     /**
@@ -78,9 +79,13 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ActualizarPacienteRequest $request, Patient $paciente)
     {
-        //
+        $paciente->update($request->all());
+        return response()->json([
+            'res' => true,
+            'mensaje' => 'Paciente Actualizado Correctamente'
+        ], 200);
     }
 
     /**
