@@ -94,8 +94,12 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Patient $paciente)
     {
-        //
+        $paciente->delete();
+        return response()->json([
+            'res' => true,
+            'mensaje' => 'Paciente Eliminado Correctamente'
+        ], 200);
     }
 }
