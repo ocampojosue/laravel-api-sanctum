@@ -95,3 +95,15 @@ class PatientSeeder extends Seeder
         ]);
     }
 }
+
+// {
+//     "name": "Aderson Felix",
+//     "surname": "Jara Lázaro",
+//     "age": "26",
+//     "sex": "Masculino",
+//     "ci": "88991122",
+//     "type_blood": "A+",
+//     "phone": "946231232",
+//     "email": "adersonjara15@gmail.com",
+//     "address": "Jr. Ramón Castilla 1090"
+// }

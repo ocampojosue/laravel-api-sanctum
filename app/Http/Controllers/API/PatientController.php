@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PatientController extends Controller
 {
@@ -26,7 +27,34 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'surname' => 'required',
+            'age' => 'required',
+            'sex' => 'required',
+            'ci' => 'required|unique:patients,ci',
+            'type_blood' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'address' => 'required'
+        ];
+        $messages = [
+            'name.required' => 'El campo :attribute es requerido',
+            'surname.required' => 'El campo :attribute es requerido',
+            'age.required' => 'El campo :attribute es requerido',
+            'sex.required' => 'El campo :attribute es requerido',
+            'ci.required' => 'El campo :attribute es requerido',
+            'ci.required' => 'El CI ya se encuentra registrado',
+            'type_blood.required' => 'El campo :attribute es requerido',
+            'phone.required' => 'El campo :attribute es requerido',
+            'email.required' => 'El campo :attribute es requerido',
+            'address.required' => 'El campo :attribute es requerido',
+        ];
+        Patient::create($request->validate($rules, $messages));
+        return response()->json([
+            'res' => true,
+            'msg' => 'Paciente guardado correcamente'
+        ]);
     }
 
     /**
